@@ -67,7 +67,7 @@ sub _test_log {
                 $log->$level($msg);
             }
         ),
-        qr/\A\w{3}\ \w{3}\ \d{1,2}\ \d{2}:\d{2}:\d{2}\ \d{4}\ \Q$target_level\E .*?\ \[\d+\]:\ \Q$msg\E\n\z/xms,
+        qr/\A\w{3}\ \w{3}\ +\d{1,2}\ \d{2}:\d{2}:\d{2}\ \d{4}\ \Q$target_level\E .*?\ \[\d+\]:\ \Q$msg\E\n\z/xms,
         $label
     );
     return;
@@ -129,7 +129,7 @@ sub do_log {
 
 package main;
 
-$ENV{MOJO_LOG_LEVEL} = 'debug'; # back to debug level
+$ENV{MOJO_LOG_LEVEL} = 'debug';    # back to debug level
 
 my $msg = 'asdfjkjkladfjk889234jkljk3rmnvm,m,zxcv,asdfkljfk';
 like(
@@ -139,7 +139,7 @@ like(
             return;
         }
     ),
-    qr/\A\w{3}\ \w{3}\ \d{1,2}\ \d{2}:\d{2}:\d{2}\ \d{4}\ debug\ MyTest:\d+\ \[\d+\]:\ \Q$msg\E\n\z/xms,
+    qr/\A\w{3}\ \w{3}\ +\d{1,2}\ \d{2}:\d{2}:\d{2}\ \d{4}\ debug\ MyTest:\d+\ \[\d+\]:\ \Q$msg\E\n\z/xms,
     'Test log package and line'
 );
 

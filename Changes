@@ -1,4 +1,7 @@
 This file documents the revision history for Perl extension Log::Any::Adapter::Mojo.
 
+x.xx 2011-05-05 00:00:00
+     - Fixed regex that matches test output
+
 0.01 2011-04-25 00:00:00
      - First release.
