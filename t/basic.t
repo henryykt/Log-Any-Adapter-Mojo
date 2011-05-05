@@ -79,7 +79,7 @@ sub _capture_stderr {
     my ($func_to_exec) = @_;
 
     my ( $temp_file_handle_stderr, $temp_file_name_stderr )
-        = tempfile( UNLINK => 1 );
+        = tempfile( UNLINK => 1, EXLOCK => 1 );
 
     open my $old_file_handle_stderr, '>&STDERR'
         or Carp::croak qq{Can't dup STDERR: $!};

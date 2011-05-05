@@ -2,6 +2,8 @@ This file documents the revision history for Perl extension Log::Any::Adapter::M
 
 x.xx 2011-05-05 00:00:00
      - Fixed regex that matches test output
+     - Fixed Test hangs on BSD systems (SREZIC)
+       (https://rt.cpan.org/Public/Bug/Display.html?id=67950)
 
 0.01 2011-04-25 00:00:00
      - First release.
