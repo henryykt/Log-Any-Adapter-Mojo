@@ -1,5 +1,8 @@
 This file documents the revision history for Perl extension Log::Any::Adapter::Mojo.
 
+0.03 2011-05-05 00:00:00
+     - Fixed Test hangs on BSD systems (SREZIC) (Now really fixed)
+
 0.02 2011-05-05 00:00:00
      - Fixed regex that matches test output
      - Fixed Test hangs on BSD systems (SREZIC)
