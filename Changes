@@ -1,5 +1,9 @@
 This file documents the revision history for Perl extension Log::Any::Adapter::Mojo.
 
+0.04 2011-09-29 00:00:00
+     - Updated testcases to deal with Mojolicious' change to simplified default log
+       format in 1.53
+
 0.03 2011-05-05 00:00:00
      - Fixed Test hangs on BSD systems (SREZIC) (Now really fixed)
 
