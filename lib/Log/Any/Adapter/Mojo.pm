@@ -1,7 +1,7 @@
 package Log::Any::Adapter::Mojo;
 
 BEGIN {
-    $Log::Any::Adapter::Mojo::VERSION = '0.05';
+    $Log::Any::Adapter::Mojo::VERSION = '0.06';
 }
 
 use strict;
