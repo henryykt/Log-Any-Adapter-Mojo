@@ -59,6 +59,8 @@ foreach my $method ( Log::Any->logging_methods ) {
 
 # Create detection methods: is_debug, is_info, etc.
 #
+
+my $true = sub { 1 };
 foreach my $method ( Log::Any->detection_methods ) {
     my $mojo_method = $method;
 
@@ -71,11 +73,22 @@ foreach my $method ( Log::Any->detection_methods ) {
         s/critical|alert|emergency/fatal/;
     }
 
+    my $level;
+    if ($mojo_method eq 'is_fatal') {
+      # is_fatal has been removed since 6.0, it was always true
+      $mojo_method = $true;
+    } elsif ($Mojolicious::VERSION >= 6.47) {
+      # as of 6.47 the is_* methods have been removed in favor of
+      # is_level($level)
+      ($level = $mojo_method) =~ s/^is_//;
+      $mojo_method = 'is_level';
+    }
+
     make_method(
         $method,
         sub {
             my $self = shift;
-            return $self->{logger}->$mojo_method(@_);
+            return $self->{logger}->$mojo_method($level ? $level : ());
         }
     );
 }

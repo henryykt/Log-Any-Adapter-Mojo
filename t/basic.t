@@ -22,11 +22,7 @@ use Log::Any qw($log);
 # From 1.53 on an experimental formatter is added to Mojo::Log and the
 # default log format has been simplified.
 # Since all testcases are based on the old format, we need a custom
-# Logger to simulate old behaviour.
-package MyLog;
-use Mojo::Base 'Mojo::Log';
-
-# overload formatter
+# log formatter to simulate old behaviour.
 sub format {
     my ( $self, $level, @msgs ) = @_;
     my $msgs = join "\n",
@@ -41,10 +37,19 @@ sub format {
     return '' . localtime(time) . " $level $pkg:$line [$$]: $msgs\n";
 }
 
-package main;
-
-# See comment about formatter above
-my $mojo_log = $Mojolicious::VERSION * 1.0 >= 1.53 ? MyLog->new : Mojo::Log->new;
+# the mechanism to format the output changed in Mojo 5.0
+my $mojo_log = do {
+  my $version = $Mojolicious::VERSION * 1.0;
+  if ($version >= 5.0) {
+    Mojo::Log->new(format => \&format);
+  } elsif ($version >= 1.53) {
+    no warnings 'redefine';
+    *Mojo::Log::format = \&format;
+    Mojo::Log->new;
+  } else {
+    Mojo::Log->new;
+  }
+};
 
 Log::Any->set_adapter( 'Mojo', logger => $mojo_log );
 
